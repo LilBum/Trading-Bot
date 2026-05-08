@@ -1,0 +1,303 @@
+{
+  "config_version": "0.8.0",
+  "change_notes": "Credentials and account IDs moved to environment variables (see .env.example).",
+  "mode": "paper",
+  "data_provider": "tradier",
+  "data_provider_fallback": true,
+  "account": {
+    "equity": 10000,
+    "risk_pct": 0.02,
+    "max_daily_loss_pct": 0.03,
+    "max_trades_per_day": 500,
+    "cooldown_minutes_after_loss": 30
+  },
+  "position_sizing": {
+    "premium_stop_pct": 0.25,
+    "max_premium_per_trade": 1200,
+    "max_contracts": 15,
+    "stop_mode": "premium_pct",
+    "atr_stop_multiplier": 1.0,
+    "fallback_to_premium_stop": true,
+    "volatility_adjustment": {
+      "enabled": true,
+      "atr_target_pct": 1.2,
+      "min_risk_pct": 0.01,
+      "max_risk_pct": 0.05
+    }
+  },
+  "strategy": {
+    "symbols": ["GLD", "SLV", "QQQ", "SPY", "NVDA", "AMZN"],
+    "interval": "1m",
+    "history_period": "1d",
+    "vwap_slope_lookback": 20,
+    "ema_fast": 9,
+    "ema_slow": 21,
+    "pullback_lookback": 8,
+    "pullback_vwap_tolerance_pct": 0.2,
+    "momentum_min_pct": 0.1,
+    "chop_lookback_minutes": 30,
+    "max_vwap_crosses": 4,
+    "max_vwap_crosses_open": 8,
+    "max_vwap_crosses_open_minutes": 60,
+    "time_filters": {
+      "avoid_open_minutes": 0,
+      "avoid_close_minutes": 0,
+      "scalp_mode": true
+    },
+    "higher_timeframe": {
+      "enabled": true,
+      "interval": "15min",
+      "ema_fast": 9,
+      "ema_slow": 21,
+      "require_alignment": true
+    },
+    "atr": {
+      "enabled": true,
+      "interval": "5min",
+      "period": 14
+    }
+  },
+  "orb": {
+    "enabled": true,
+    "primary": true,
+    "fallback_to_vwap": false,
+    "range_minutes": 15,
+    "session_open_time": "09:30",
+    "require_volume_confirmation": true,
+    "volume_multiplier": 1.2,
+    "volume_lookback": 20,
+    "breakout_buffer_points": 0.0,
+    "retest_band_points": 0.0,
+    "hold_bars": 1,
+    "require_retest_or_hold": false,
+    "stop_loss_points": 50.0,
+    "target_points": 100.0
+  },
+  "data_quality": {
+    "max_bar_age_minutes": 60,
+    "min_score": 0.0,
+    "stale_penalty": 0.5,
+    "bar_age_penalty": 0.2,
+    "quote_penalty": 0.3,
+    "missing_iv_penalty": 0.2,
+    "allow_stale_when_closed": true
+  },
+  "options": {
+    "target_dte": 1,
+    "moneyness_preference": "ATM_OR_1ITM",
+    "min_open_interest": 0,
+    "min_volume": 0,
+    "max_spread_pct": 0.2,
+    "max_spread_pct_tiers": [
+      { "max_price": 1.0, "max_spread_pct": 0.35 },
+      { "max_price": 2.0, "max_spread_pct": 0.25 }
+    ],
+    "min_option_price": 0.2,
+    "max_option_price": 15.0,
+    "min_quote_size": 0,
+    "max_quote_age_minutes": 30,
+    "max_quote_age_seconds": null,
+    "require_nbbo": false,
+    "allow_last_price_without_nbbo": true,
+    "require_quote_size": false,
+    "risk_free_rate": 0.02,
+    "delta_target": 0.5,
+    "delta_tolerance": 0.2,
+    "oi_score_scale": 3.0,
+    "volume_score_scale": 3.0,
+    "max_candidates": 20,
+    "top_candidate_count": 3,
+    "require_iv_for_short_dte": false,
+    "require_quote_time": false,
+    "short_dte_threshold_days": 2,
+    "iv_deviation_pct_max": 60,
+    "iv_deviation_hard_reject": false,
+    "iv_deviation_band_pct": 1.0,
+    "scoring": {
+      "weight_spread": 0.3,
+      "weight_oi": 0.15,
+      "weight_volume": 0.15,
+      "weight_delta": 0.15,
+      "weight_price": 0.1,
+      "weight_expected_move": 0.1,
+      "weight_quote_freshness": 0.03,
+      "weight_iv_deviation": 0.02
+    },
+    "penalties": {
+      "missing_iv": 0.1,
+      "gamma_threshold": 0.15,
+      "gamma_penalty": 0.1,
+      "theta_threshold": 0.2,
+      "theta_penalty": 0.1,
+      "quote_staleness_penalty": 0.15
+    },
+    "gamma_warning_days": 2,
+    "atm_threshold_pct": 0.5
+  },
+  "sentiment": {
+    "enabled": false,
+    "source": "manual",
+    "mode": "advisory",
+    "manual_value": null,
+    "manual_timestamp_utc": null,
+    "fail_closed": false,
+    "filters": {
+      "block_calls_above": 75,
+      "block_puts_below": 25
+    },
+    "cnn_url": "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
+    "cache_path": "sentiment_cache.json",
+    "cache_minutes": 30
+  },
+  "webull": {
+    "app_key": "",
+    "app_secret": "",
+    "test_app_key": "",
+    "test_app_secret": "",
+    "region": "us",
+    "api_endpoint": null
+  },
+  "public": {
+    "secret_token": "",
+    "validity_minutes": 15,
+    "account_id": null,
+    "base_url": "https://api.public.com",
+    "bars_source": "massive",
+    "use_greeks": true,
+    "max_greeks": 250,
+    "greeks_batch_size": 50
+  },
+  "tradier": {
+    "access_token": "",
+    "sandbox_token": "",
+    "sandbox": true,
+    "base_url": "https://api.tradier.com/v1",
+    "sandbox_base_url": "https://sandbox.tradier.com/v1"
+  },
+  "finnhub": {
+    "api_key": "",
+    "base_url": "https://finnhub.io"
+  },
+  "massive": {
+    "api_key": "",
+    "base_url": "https://api.massive.com",
+    "auth_mode": "query"
+  },
+  "risk_controls": {
+    "kill_switch": false,
+    "block_on_data_error": true,
+    "require_bracket": false,
+    "max_notional_per_order": 1200,
+    "max_contracts_per_order": 15,
+    "max_position_per_symbol": 20,
+    "max_total_contracts_per_day": 400,
+    "reset_counters_on_start": true,
+    "min_seconds_between_signals": 60,
+    "duplicate_order_window_seconds": 120,
+    "max_mid_to_last_price_deviation_pct": null,
+    "event_risk_dates": [],
+    "control_levels": {
+      "kill_switch": "hard",
+      "data_unhealthy": "hard",
+      "price_deviation": "warn",
+      "max_notional_per_order": "hard",
+      "max_contracts_per_order": "hard",
+      "max_position_per_symbol": "hard",
+      "max_total_contracts_per_day": "hard",
+      "max_trades_per_day": "hard",
+      "throttle": "warn",
+      "duplicate_order": "warn",
+      "daily_loss_limit": "hard",
+      "cooldown_after_loss": "warn",
+      "event_risk": "hard"
+    }
+  },
+  "exits": {
+    "take_profit_pct": 0.3,
+    "stop_loss_pct": 0.25,
+    "max_hold_minutes": 120,
+    "exit_before_close_minutes": 5,
+    "trailing_stop_pct": 0.2,
+    "trailing_stop_activation_pct": 0.3,
+    "trailing_use_chop": true,
+    "trailing_stop_pct_chop": 0.12,
+    "exit_limit_mode": "marketable"
+  },
+  "execution": {
+    "enabled": true,
+    "auto_submit": true,
+    "exit_auto_submit": true,
+    "mode": "paper",
+    "adapter": "tradier",
+    "order_type": "MARKET",
+    "exit_order_type": "MARKET",
+    "tif": "DAY",
+    "tradier": {
+      "account_id": "",
+      "sandbox": true,
+      "access_token": "",
+      "sandbox_token": "",
+      "base_url": "https://api.tradier.com/v1",
+      "sandbox_base_url": "https://sandbox.tradier.com/v1",
+      "preview": false,
+      "simulate_on_error": false,
+      "simulate_fill_on_ack": false,
+      "fill_poll_seconds": 8,
+      "fill_poll_interval": 1
+    },
+    "test_order": {
+      "symbol": "GLD",
+      "expiration": "2026-02-09",
+      "strike": 456.0,
+      "option_type": "CALL",
+      "qty": 1,
+      "limit_price": 0.5
+    },
+    "paper": {
+      "fill_policy": "mid",
+      "slippage_bps": 2.0,
+      "slippage_spread_factor": 0.25,
+      "fill_delay_ms": 0,
+      "strict_limits": false,
+      "contract_multiplier": 100
+    },
+    "webull": {
+      "account_id": "",
+      "use_preview": false,
+      "simulate_if_unavailable": true,
+      "simulate_on_error": true,
+      "paper_only": true,
+      "paper_endpoint": "us-openapi-alb.uat.webullbroker.com"
+    }
+  },
+  "logging": {
+    "journal_path": "journal.jsonl",
+    "event_log_path": "events.jsonl",
+    "positions_state_path": "positions_state.json",
+    "pnl_strict": true
+  },
+  "benchmark": {
+    "enabled": false,
+    "submit_rejected": false,
+    "override_contracts": 1,
+    "use_orb_signal": true
+  },
+  "live_grade": {
+    "enabled": true,
+    "bars_fallback": ["finnhub"],
+    "allow_yahoo_fallback": false
+  },
+  "output": {
+    "mode": "simple"
+  },
+  "watch": {
+    "enabled": false,
+    "interval_seconds": 5
+  },
+  "web": {
+    "enabled": false,
+    "host": "127.0.0.1",
+    "port": 5500,
+    "update_seconds": 15
+  }
+}

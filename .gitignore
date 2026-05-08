@@ -1,0 +1,40 @@
+# Secrets and environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+*.log.*
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Runtime state and trade history (never commit)
+events.jsonl
+journal.jsonl
+positions_state.json
+sentiment_cache.json
+live_journal.jsonl
+live_journal.*.jsonl
+logs/
+
+# Historical bars CSVs are large (10MB+ each for 2yr 1m bars).
+# Re-download via scripts/download_futures_databento.py instead of committing.
+data/historical/*.csv
+data/historical/*.parquet
+
+# Editor / OS
+.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+dist/

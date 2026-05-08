@@ -1,0 +1,14 @@
+﻿yfinance==0.2.43
+pandas==2.2.2
+numpy==1.26.4
+pytz==2024.1
+pytest==8.2.2
+webull-openapi-python-sdk==1.1.0
+requests==2.32.3
+# Live execution against IBKR TWS / Gateway. Note: on Python 3.12+ the
+# eventkit dependency requires an asyncio loop primer at import time;
+# src/futures_execution/ibkr.py handles that automatically.
+ib_insync==0.9.86
+# Historical CME futures bars (ohlcv-1m schema for ES/NQ/MES/MNQ).
+# See memory/reference_databento.md for cost notes (~$5 for 2yr ES+NQ).
+databento==0.77.0
