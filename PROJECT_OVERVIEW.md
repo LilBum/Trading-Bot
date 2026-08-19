@@ -1,6 +1,6 @@
 # Trading Bot — Project Overview
 
-*Last updated: 2026-05-05 (post-codex review fixes)*
+*Last updated: 2026-05-05 (post-review fixes)*
 
 ---
 

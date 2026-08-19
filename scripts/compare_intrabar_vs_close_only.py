@@ -1,6 +1,6 @@
 """Compare close-only vs intrabar TP/SL evaluation on the V1 and V2 holdouts.
 
-Codex review (2026-05-05) flagged that the futures backtest was evaluating
+A code review (2026-05-05) flagged that the futures backtest was evaluating
 TP/SL on bar Close only, missing intrabar fires that pulled back. Live
 execution will use broker-side OCO which fires on tick prints, so the
 backtest's forward expectations should reflect intrabar behaviour too.
